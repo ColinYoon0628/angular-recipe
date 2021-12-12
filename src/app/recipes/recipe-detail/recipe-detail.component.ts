@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Ingredient } from 'src/app/shared/models/ingredient.model';
+import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service';
 import { Recipe } from '../models/recipe.model';
 
 @Component({
@@ -8,9 +10,12 @@ import { Recipe } from '../models/recipe.model';
 })
 export class RecipeDetailComponent implements OnInit {
   @Input() selectedRecipe: Recipe;
-  constructor() { }
+  constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit(): void {
   }
 
+  sendToList(): void {
+    this.shoppingListService.addIngredientsFromRecipe(this.selectedRecipe.ingredients);
+  }
 }
