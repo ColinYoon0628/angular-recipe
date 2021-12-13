@@ -22,4 +22,8 @@ export class RecipeService {
         //slice: return copy of array, make sure no one can access to this array from outside.
         return this.recipes.slice();
     }
+
+    getRecipe(id: number) {
+        return this.recipes[id];
+    }
 }
