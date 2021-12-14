@@ -5,7 +5,7 @@ import { Ingredient } from './../shared/models/ingredient.model';
 @Injectable({
     providedIn:'root'
 })
-export class ShoppingListService implements OnDestroy {
+export class ShoppingListService {
     ingredientsChanged = new Subject<Ingredient[]>();
     editingSubject = new Subject<number>();
     private ingredients: Ingredient[] = [
@@ -32,7 +32,13 @@ export class ShoppingListService implements OnDestroy {
         })
     }
 
-    ngOnDestroy(): void {
-        throw new Error("Method not implemented.");
+    updateIngredient(index: number, newIngredient: Ingredient): void {
+        this.ingredients[index] = newIngredient;
+        this.ingredientsChanged.next(this.ingredients);
+    }
+
+    deleteIngredient(index: number): void {
+        this.ingredients.splice(index, 1);
+        this.ingredientsChanged.next(this.ingredients);
     }
 }
