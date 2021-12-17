@@ -1,3 +1,4 @@
+import { RecipeApiService } from './../recipes/recipe-api.service';
 import { Component } from "@angular/core";
 
 @Component({
@@ -6,4 +7,14 @@ import { Component } from "@angular/core";
 })
 export class HeaderComponent {
     collapsed: boolean = true;
+
+    constructor(private recipeApiService: RecipeApiService ) {}
+
+    onSave() {
+        this.recipeApiService.storeRecipe();
+    }
+
+    onFetch() {
+        this.recipeApiService.fetchRecipe();
+    }
 }
