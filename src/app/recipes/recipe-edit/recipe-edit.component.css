@@ -1,3 +1,11 @@
-.ng-invalid:not(form).ng-touched  {
+input.ng-invalid:not(form).ng-touched  {
   border: 3px solid #a94442; /* red */
+}
+
+textarea.ng-invalid:not(form).ng-touched  {
+  border: 3px solid #a94442; /* red */
+}
+
+.btn {
+  margin: 5px;
 }
