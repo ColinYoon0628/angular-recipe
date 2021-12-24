@@ -1,3 +1,4 @@
+import { RecipeApiService } from './../recipe-api.service';
 import { RecipeService } from './../recipe.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -15,6 +16,7 @@ export class RecipeDetailComponent implements OnInit {
   constructor(
     private shoppingListService: ShoppingListService,
     private recipeService: RecipeService,
+    private recipeApiService: RecipeApiService,
     private route: ActivatedRoute,
     private router: Router
     ) { }
@@ -36,6 +38,7 @@ export class RecipeDetailComponent implements OnInit {
 
   deleteRecipe(): void {
     this.recipeService.deleteRecipe(this.id);
+    this.recipeApiService.storeRecipe();
     this.router.navigate([''], {relativeTo: this.route});
   }
 }

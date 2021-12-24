@@ -1,3 +1,4 @@
+import { RecipeApiService } from './../recipe-api.service';
 import { Subscription } from 'rxjs';
 import { Recipe } from './../models/recipe.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -14,11 +15,13 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   constructor(
     private recipeService: RecipeService,
+    private recipeApiService: RecipeApiService,
     private router: Router,
     private route: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
+    this.recipeApiService.fetchRecipe().subscribe();
     this.subscription = this.recipeService.recipesChanged.subscribe((recipe: Recipe[]) => {
       this.recipes = recipe;
     })

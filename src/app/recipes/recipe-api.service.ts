@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Recipe } from "./models/recipe.model";
 import { RecipeService } from './recipe.service';
-import { map } from 'rxjs/operators'
+import { map, tap } from 'rxjs/operators'
 @Injectable({
     providedIn:'root'
 })
@@ -19,13 +19,13 @@ export class RecipeApiService {
     }
 
     fetchRecipe() {
-        this.http.get(`${this.baseURL}recipes.json`).pipe(map((recipes: Recipe[]) => {
+        return this.http.get(`${this.baseURL}recipes.json`).pipe(map((recipes: Recipe[]) => {
             return recipes.map((recipe) => {
                 return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []};
             })
-        }))
-        .subscribe((res: Recipe[]) => {
-            this.recipeService.setRecipes(res);
-        });
+        }), 
+        tap(recipes => {
+            this.recipeService.setRecipes(recipes);
+        }));
     }
 }
