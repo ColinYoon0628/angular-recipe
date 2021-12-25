@@ -92,4 +92,8 @@ export class RecipeEditComponent implements OnInit {
       'ingredients': recipeIngredients
     });
   }
+
+  get name() { return this.recipeForm.get('name'); }
+  get imagePath() { return this.recipeForm.get('imagePath'); }
+  get description() { return this.recipeForm.get('description'); }
 }

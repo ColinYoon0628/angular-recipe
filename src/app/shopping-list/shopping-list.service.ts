@@ -8,10 +8,7 @@ import { Ingredient } from './../shared/models/ingredient.model';
 export class ShoppingListService {
     ingredientsChanged = new Subject<Ingredient[]>();
     editingSubject = new Subject<number>();
-    private ingredients: Ingredient[] = [
-        new Ingredient('Apple', 5),
-        new Ingredient('Tomato', 2)
-      ];
+    private ingredients: Ingredient[] = [];
 
     getIngredients(): Ingredient[] {
         return this.ingredients;
